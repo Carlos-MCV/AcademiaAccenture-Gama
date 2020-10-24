@@ -2,25 +2,23 @@ package ex02;
 
 import java.util.Scanner;
 
-public class Account {
+public abstract class Account {
     Scanner teclado= new Scanner(System.in);
-    private Account account;
     private SavingsAccount savingsAccount;
-    private double saldo;
+    protected double saldo;
+    protected double taxes;
     private String type;
 
 
     public Account() {
     }
 
-
-
-    public String getType() {
-        return "Account";
+    public double getTaxes() {
+        return taxes;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTaxes(double taxes) {
+        this.taxes = taxes;
     }
 
     public double getSaldo() {
@@ -29,14 +27,13 @@ public class Account {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
-        //return saldo;
     }
 
 
 
     public void situacao(){
         System.out.println("Dados da Conta: ");
-        System.out.print("Saldo: "+this.getSaldo());
+        System.out.println("Saldo: "+this.getSaldo());
     }
 
     public void deposit(double deposito){
@@ -52,17 +49,14 @@ public class Account {
         return this.getSaldo();
     }
 
-    public void transfer(Account a,SavingsAccount s){
-        this.account=a;
+    public void transfer(SavingsAccount s){
         this.savingsAccount=s;
 
         System.out.println("Quanto você quer transferir para a poupança?");
         int transferAmount=teclado.nextInt();
 
-        account.setSaldo(account.getSaldo()-transferAmount);
         savingsAccount.setSaldo(savingsAccount.getSaldo()+transferAmount);
         System.out.println("Agora você tem: "+savingsAccount.getSaldo()+" na poupança!!");
-
     }
 
 }
